@@ -3,7 +3,7 @@
 ## 1.8 Remarkable trees of Paris
 You are going to write some MapReduce jobs on the remarkable trees of Paris using this dataset. Download the file and put it in your HDFS home directory. Remember to ignore the first row in every mapper on this dataset.
 
-`
+```sh
 [thomas.almeida@bigdata01 ~]$ hdfs dfs -rm -r /user/thomas.almeida/output_districts
 yarn jar /home/thomas.almeida/hadoop-examples-mapreduce-1.0-SNAPSHOT-jar-with-dependencies.jar district /user/thomas.almeida/trees.csv /user/thomas.almeida/output_districts
 hdfs dfs -cat /user/thomas.almeida/output_districts/part-00000
@@ -127,12 +127,14 @@ cat: `/user/thomas.almeida/output_districts/part-00000': No such file or directo
 18      1
 19      6
 20      3
-`
+```
 
 
 ### 1.8.2 Show all existing species (very easy)
 Write a MapReduce job that displays the list of different species trees in this file.
-`[thomas.almeida@bigdata01 ~]$ hdfs dfs -rm -r /user/thomas.almeida/output_species
+
+```sh
+[thomas.almeida@bigdata01 ~]$ hdfs dfs -rm -r /user/thomas.almeida/output_species
 yarn jar /home/thomas.almeida/hadoop-examples-mapreduce-1.0-SNAPSHOT-jar-with-dependencies.jar species /user/thomas.almeida/trees.csv /user/thomas.almeida/output_species
 hdfs dfs -cat /user/thomas.almeida/output_species/part-r-00000
 rm: `/user/thomas.almeida/output_species': No such file or directory
@@ -281,14 +283,15 @@ tulipifera
 ulmoides
 virginiana
 x acerifolia
-`
 
+```
 
 
 ### 1.8.3 Number of trees by kinds (easy)
 Write a MapReduce job that calculates the number of trees of each kind. For example, there are 3 Acer, 19 Platanus, etc. How will you define the keys and values passed between the mapper and the reducer? The mapper must extract the kind of tree. The reducer gets the pairs (keyI, valueI) with the same key, so this key must be the kind of tree; the value being the number of such trees.
 
-`[thomas.almeida@bigdata01 ~]$ hdfs dfs -rm -r /user/thomas.almeida/output_treeskind
+```sh
+[thomas.almeida@bigdata01 ~]$ hdfs dfs -rm -r /user/thomas.almeida/output_treeskind
 yarn jar /home/thomas.almeida/hadoop-examples-mapreduce-1.0-SNAPSHOT-jar-with-dependencies.jar treeskind /user/thomas.almeida/trees.csv /user/thomas.almeida/output_treeskind
 hdfs dfs -cat /user/thomas.almeida/output_treeskind/part-r-00000        
 rm: `/user/thomas.almeida/output_treeskind': No such file or directory
@@ -436,14 +439,16 @@ tulipifera      1715
 ulmoides        1799
 virginiana      1885
 x acerifolia    1982
-`
+
+```
 
 
 
 ### 1.8.4 Maximum height per kind of tree (average)
 Write a MapReduce job that calculates the height of the tallest tree of each kind. For example, the tallest Acer is 16m, the tallest Platanus is 45m, etc.
 
-`[thomas.almeida@bigdata01 ~]$ hdfs dfs -rm -r /user/thomas.almeida/output_maxheightkind
+```sh
+[thomas.almeida@bigdata01 ~]$ hdfs dfs -rm -r /user/thomas.almeida/output_maxheightkind
 yarn jar /home/thomas.almeida/hadoop-examples-mapreduce-1.0-SNAPSHOT-jar-with-dependencies.jar maxheightkind /user/thomas.almeida/trees.csv /user/thomas.almeida/output_maxheightkind
 hdfs dfs -cat /user/thomas.almeida/output_maxheightkind/part-r-00000    
 rm: `/user/thomas.almeida/output_maxheightkind': No such file or directory
@@ -591,12 +596,14 @@ tulipifera      35.0
 ulmoides        12.0
 virginiana      14.0
 x acerifolia    45.0
-`
+
+```
 
 ### 1.8.5 Sort the trees height from smallest to largest (average)
 Write a MapReduce job that sorts the trees' height from smallest to largest.
 
-`[thomas.almeida@bigdata01 ~]$ hdfs dfs -rm -r /user/thomas.almeida/output_sortTrees
+```sh
+[thomas.almeida@bigdata01 ~]$ hdfs dfs -rm -r /user/thomas.almeida/output_sortTrees
 yarn jar /home/thomas.almeida/hadoop-examples-mapreduce-1.0-SNAPSHOT-jar-with-dependencies.jar sortTrees /user/thomas.almeida/trees.csv /user/thomas.almeida/output_sortTrees
 hdfs dfs -cat /user/thomas.almeida/output_sortTrees/part-r-00000        
 rm: `/user/thomas.almeida/output_sortTrees': No such file or directory
@@ -795,12 +802,13 @@ bigdata01.efrei.hadoop.clemlab.io:8090/proxy/application_1720701352744_0899/
 40 - Platanus x acerifolia (Platanaceae)        40.0
 90 - Platanus x acerifolia (Platanaceae)        42.0
 21 - Platanus x acerifolia (Platanaceae)        45.0
-`
+
+```
 
 ### 1.8.6 District containing the oldest tree (difficult)
 Write a MapReduce job that displays the district where the oldest tree is. The mapper must extract the age and district of each tree. The problem is, this information can’t be used as keys and values (why?). You will need to define a subclass of Writable to contain both information. The reducer should consolidate all this data and only output the district.
 
-`
+```sh
 [thomas.almeida@bigdata01 ~]$ hdfs dfs -rm -r /user/thomas.almeida/output_oldestTreeDistrict
 yarn jar /home/thomas.almeida/hadoop-examples-mapreduce-1.0-SNAPSHOT-jar-with-dependencies.jar oldestTreeDistrict /user/thomas.almeida/trees.csv /user/thomas.almeida/output_oldestTreeDistrict
 hdfs dfs -cat /user/thomas.almeida/output_oldestTreeDistrict/part-r-00000
@@ -906,14 +914,14 @@ bigdata01.efrei.hadoop.clemlab.io:8090/proxy/application_1720701352744_0900/
                 Bytes Written=7
 1601    5
 
-`
+```
 
 
 
 ### 1.8.7 District containing the most trees (very difficult)
 Write a MapReduce job that displays the district that contains the most trees. The problem is that the program will almost certainly display a list of pairs (district number, number of trees) not ordered by number. If we apply this program to real big data not limited to the arrondissements of Paris, we would recover a huge list, unusable and the classification could take hours. How do you keep only the best answer? The solution probably goes through a second MapReduce phase, in which the Mapper retrieves the pairs (district, number) from the first phase, and makes them pairs whose key is unimportant (NullWritable) and the values themselves are the same input pairs. The Reducer receives them all and must keep the best pair.
 
-`
+```sh
 [thomas.almeida@bigdata01 ~]$ hdfs dfs -rm -r /user/thomas.almeida/output_districtmaxtrees
 yarn jar /home/thomas.almeida/hadoop-examples-mapreduce-1.0-SNAPSHOT-jar-with-dependencies.jar districtmaxtrees /user/thomas.almeida/trees.csv /user/thomas.almeida/output_districtmaxtrees
 hdfs dfs -cat /user/thomas.almeida/output_districtmaxtrees/part-r-00000 
@@ -1016,8 +1024,5 @@ yId=8), Kind: HDFS_DELEGATION_TOKEN, Service: ha-hdfs:efrei, Ident: (token for t
                 Bytes Written=6
 16      36
 
-`
+```
 
-
-#   H A D O O P - E X A M P L E S - M A P R E D U C E  
- 

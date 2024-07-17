@@ -1,5 +1,5 @@
 # EFREI Paris, 2021 Big Data Introduction 2021 YARN & MapReduce 2
-
+Github link to the project : https://github.com/thomasalmd/hadoop-examples-mapreduce-1
 ## 1.8 Remarkable trees of Paris
 You are going to write some MapReduce jobs on the remarkable trees of Paris using this dataset. Download the file and put it in your HDFS home directory. Remember to ignore the first row in every mapper on this dataset.
 

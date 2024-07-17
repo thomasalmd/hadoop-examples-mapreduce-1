@@ -1019,3 +1019,5 @@ yId=8), Kind: HDFS_DELEGATION_TOKEN, Service: ha-hdfs:efrei, Ident: (token for t
 `
 
 
+#   H A D O O P - E X A M P L E S - M A P R E D U C E  
+ 
